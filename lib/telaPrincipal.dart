@@ -1,5 +1,6 @@
-import 'package:app_caraoucoroa/jogo.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'jogo.dart';
 
 class telaPrincipal extends StatefulWidget {
   const telaPrincipal({Key? key});
@@ -9,6 +10,17 @@ class telaPrincipal extends StatefulWidget {
 }
 
 class _telaPrincipalState extends State<telaPrincipal> {
+  void _exibirResultado() {
+    var itens = ["cara", "coroa"];
+    var numero = Random().nextInt(itens.length);
+    var resultado = itens[numero];
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => jogo(valor: resultado)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +35,7 @@ class _telaPrincipalState extends State<telaPrincipal> {
               Image.asset("images/logo.png"),
               Padding(padding: EdgeInsets.only(top: 32)),
               GestureDetector(
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => jogo(),
-                    )),
+                onTap: _exibirResultado,
                 child: Image.asset("images/botao_jogar.png"),
               )
             ],
